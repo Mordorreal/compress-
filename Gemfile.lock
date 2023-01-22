@@ -79,6 +79,8 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    email_validator (2.2.4)
+      activemodel
     erubi (1.12.0)
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
@@ -225,6 +227,7 @@ DEPENDENCIES
   bootsnap
   byebug (~> 11.1)
   debug
+  email_validator
   faker
   jbuilder
   pg (~> 1.1)
