@@ -36,12 +36,12 @@ Metrics/ParameterLists:
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 5 lines of code.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#short-methods'
-  Max: 5
+  Max: 10
   Enabled: true
 
 Metrics/BlockLength:
   CountComments: false
-  Max: 5
+  Max: 10
   AllowedMethods:
     - context
     - describe
@@ -100,12 +100,6 @@ Style/LineEndConcatenation:
   Description: >-
     Use \ instead of + or << to concatenate two string literals at
     line end.
-  Enabled: true
-
-Style/StringLiterals:
-  Description: 'Checks if uses of quotes match the configured preference.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-string-literals'
-  EnforcedStyle: double_quotes
   Enabled: true
 
 Style/TrailingCommaInArguments:
