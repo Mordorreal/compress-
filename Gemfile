@@ -42,6 +42,8 @@ group :development, :test do
   gem 'faker'
   # For debugging
   gem 'byebug', '~> 11.1'
+  # Fast seeding
+  gem 'activerecord-copy'
 end
 
 group :development do
