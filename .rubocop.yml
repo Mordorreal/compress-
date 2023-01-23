@@ -175,3 +175,8 @@ Rails/Delegate:
 
 Bundler/OrderedGems:
   Enabled: false
+
+# Rspec Cops
+
+RSpec/ExampleLength:
+  Max: 10
