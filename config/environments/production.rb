@@ -55,12 +55,14 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=#{2.days.to_i}",
+  }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "compress__production"
+  config.active_job.queue_adapter = :sidekiq
+  config.active_job.queue_name_prefix = 'compress__production'
 
   config.action_mailer.perform_caching = false
 

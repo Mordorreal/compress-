@@ -7,4 +7,8 @@ Rails.application.routes.draw do
     get 'download', on: :member
     post 'compress', on: :collection
   end
+
+  # Sidekiq Web UI
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end
