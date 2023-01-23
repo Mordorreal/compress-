@@ -1,16 +1,9 @@
 class UsersController < ApplicationController
-  rescue_from 'ActionController::ParameterMissing' do |e|
-    render json: {
-             error_message: "Missing parameter: #{e.param}",
-           },
-           status: :bad_request
-  end
-
-  skip_before_action :verify_authenticity_token
-
   # GET /users
   def index
-    @users = User.all
+    # Can be improved by using a pagination and caching warm up but this is not in requirements
+    @users = []
+    User.includes(:images).joins(:images).find_each { |user| @users << user }
   end
 
   # GET /users/1

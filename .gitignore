@@ -36,3 +36,4 @@
 !/app/assets/builds/.keep
 .byebug_history
 spec/examples.txt
+.DS_Store

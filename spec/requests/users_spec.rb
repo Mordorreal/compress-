@@ -39,7 +39,7 @@ RSpec.describe '/users' do
         user = User.find_by(email: valid_attributes[:email])
 
         expect(response.body).to include(
-          { user: { id: user.id, email: user.email } }.to_json,
+          { user: { id: user.id, email: user.email, images: [] } }.to_json,
         )
       end
     end
