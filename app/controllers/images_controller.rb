@@ -1,7 +1,7 @@
 class ImagesController < ApplicationController
   # GET /images
   def index
-    # Can be improved by using a pagination and caching warm up but this is not in requirements
+    # Can be improved by using a pagination and caching warm up
     @images = []
     Image
       .includes(:user)
@@ -11,19 +11,30 @@ class ImagesController < ApplicationController
 
   # GET /images/1/download
   def download
-    @image = Image.find(params[:id])
+    @image = Image.find_by(id: params[:id])
 
-    if @image.compressed?
-      redirect_to @image.download_url, format: json, status: :ok
+    if @image&.compressed?
+      redirect_to @image.download_url, allow_other_host: true, status: :ok
     else
-      head status: :not_found
+      head :not_found
     end
   end
 
   # POST /images/compress
   def compress
-    CompressJob.perform_later(image_params)
-    head status: :ok
+    user = User.find_by(id: image_params[:user_id])
+
+    if user
+      image = user.images.create(status: :uploaded)
+
+      # can be improved by uploading to S3 directly from the client which is preferable way accoding to AWS docs
+      image_url = ::UploadFileToS3Service.call(image_params[:file])
+
+      compress_image_async(image.id, image_url)
+      head :ok
+    else
+      no_user_error
+    end
   end
 
   private
@@ -31,5 +42,13 @@ class ImagesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def image_params
     params.require(:image).permit(:user_id, :file)
+  end
+
+  def no_user_error
+    render json: { error: 'User does not exist' }, status: :unprocessable_entity
+  end
+
+  def compress_image_async(image_id, image_url)
+    CompressJob.perform_async({ image_id:, image_url: }.stringify_keys)
   end
 end
