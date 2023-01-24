@@ -30,4 +30,5 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  new_file: 'You got a new compressed file!'
+  error_with_file: 'File is not a valid image!'
