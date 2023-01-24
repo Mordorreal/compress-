@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe UploadFileToS3Service do
+  # need to disable this cop because we need to use double instead of instance_double
+  # rubocop:disable RSpec/VerifiedDoubles
   let(:file) { double(File, content_type: 'image/jpeg', path: 'testpath') }
+  # rubocop:enable RSpec/VerifiedDoubles
   let(:aws_object) { instance_double(Aws::S3::Object) }
 
   before do

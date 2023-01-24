@@ -24,9 +24,12 @@ RSpec.describe CompressJob, type: :job do
     allow(UploadFileToS3Service).to receive(:call).and_return(
       image_downdload_url,
     )
+    # need to disable this cop because we need to mock library incide of private method
+    # rubocop:disable RSpec/AnyInstance
     allow_any_instance_of(described_class).to receive(
       :compress_image,
     ).and_return(Tempfile.new)
+    # rubocop:enable RSpec/AnyInstance
     allow(DownloadMailer).to receive(:with).and_return(mailer)
   end
 

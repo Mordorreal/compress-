@@ -39,15 +39,9 @@ RSpec.describe '/images' do
 
     it 'renders a successful response' do
       headers = { 'Content-Type' => 'multipart/form-data' }
+      params = { image: { user_id: user.id, file: } }
 
-      post compress_images_url,
-           params: {
-             image: {
-               user_id: user.id,
-               file:,
-             },
-           },
-           headers: headers
+      post(compress_images_url, params:, headers:)
 
       expect(response).to be_successful
     end
