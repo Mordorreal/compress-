@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
   # GET /users
   def index
-    # Can be improved by using a pagination and caching warm up but this is not in requirements
+    # Can be improved by using a pagination and caching warm up
     @users = []
     User.includes(:images).joins(:images).find_each { |user| @users << user }
   end
 
   # GET /users/1
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
   end
 
   # POST /users
