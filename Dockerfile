@@ -1,5 +1,5 @@
 FROM ruby:3.2
-RUN apt-get update -qq && apt-get install -y postgresql-client
+RUN apt-get update -qq && apt-get install -y postgresql-client graphicsmagick
 WORKDIR /compress
 COPY Gemfile /compress/Gemfile
 COPY Gemfile.lock /compress/Gemfile.lock

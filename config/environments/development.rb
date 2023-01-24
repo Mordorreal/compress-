@@ -20,6 +20,12 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   config.action_controller.enable_fragment_cache_logging = true
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = { address: 'smtp4dev', port: 25 }
+  config.action_mailer.deliver_later_queue_name = :mailers
+
   config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
 
   config.public_file_server.headers = {
