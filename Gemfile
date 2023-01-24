@@ -36,6 +36,8 @@ gem 'hiredis'
 
 # Speedup jbuilder
 gem 'oj'
+gem 'oj_mimic_json'
+gem 'multi_json'
 
 # aws s3 integration
 gem 'aws-sdk-s3'

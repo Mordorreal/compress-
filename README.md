@@ -1,7 +1,7 @@
 # Compress-
 
 Small service that compress users files. Just a task for interview, don't take it too seriosly.
-Compress can handle speed seeding of 2m records with copy (~3 min) and can return same amount records in one bulk with somehow meaningfull amount of time (cold for 2m records total ~280s (Views: ~145s | ActiveRecord: ~43s), ). Can be speedup by pagination and caching warm up but this is not in requirements.
+Compress can handle speed seeding of 2m records with copy (~3 min) and can return same amount records in one bulk with somehow meaningfull amount of time (cold for 2m records total ~191s in 191083ms (Views: 145430.2ms | ActiveRecord: 45651.2ms | Allocations: 136069401)). Can be speedup by pagination and caching warm up but this is not in requirements.
 Images stored on S3 and compressed with sidekiq async jobs.
 
 * How to run service

@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   # GET /users
   def index
-    # Can be improved by using a pagination and caching warm up
-    @users = []
-    User.includes(:images).joins(:images).find_each { |user| @users << user }
+    # Can be improved by using a pagination, caching warm up and
+    # faster json serializer (for example, jsonapi-serializer but this will need to use a different json
+    # format for the response)
+    @users = User.includes(:images).joins(:images).find_each(batch_size: 50_000)
   end
 
   # GET /users/1

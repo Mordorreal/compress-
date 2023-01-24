@@ -1,12 +1,10 @@
 class ImagesController < ApplicationController
   # GET /images
   def index
-    # Can be improved by using a pagination and caching warm up
-    @images = []
-    Image
-      .includes(:user)
-      .joins(:user)
-      .find_each(batch_size: 50_000) { |image| @images << image }
+    # Can be improved by using a pagination, caching warm up and
+    # faster json serializer (for example, jsonapi-serializer but this will need to use a different json
+    # format for the response)
+    @images = Image.includes(:user).joins(:user).find_each(batch_size: 50_000)
   end
 
   # GET /images/1/download

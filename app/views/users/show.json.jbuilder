@@ -1,1 +1,4 @@
-json.user { json.partial! 'users/user', user: @user, cached: true }
+json.user do
+  json.id @user.id
+  json.email @user.email
+end
